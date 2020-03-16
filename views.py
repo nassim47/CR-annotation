@@ -1,14 +1,12 @@
 import os
-import xml.dom.minidom
 
-import xml.etree.ElementTree as ET
-from xml.dom.minidom import parse
-
-
-
-from flask import Flask , render_template, request, redirect, flash, url_for, send_file,safe_join
+from flask import Flask, render_template, request, redirect, flash, url_for
 from werkzeug.utils import secure_filename
-from flask import send_from_directory
+
+import xml.dom.minidom
+import xml.etree.ElementTree as ET
+
+from lxml import etree
 
 
 UPLOAD_FOLDER = '/Users/nassim/Desktop/Stage'
@@ -65,8 +63,17 @@ def afficher(filename):
     data ={
         'title':'Afficher',
        }
-    doc = xml.dom.minidom.parse("/Users/nassim/Desktop/Stage/"+filename)
-    return render_template('afficher.html', data=data, doc=doc)
+
+    #doc = xml.dom.minidom.parse("/Users/nassim/Desktop/Stage/"+filename)
+    #medical_event = doc.getElementsByTagName("medical_event")
+    #tree = etree.parse("/Users/nassim/Desktop/Stage/"+filename)
+
+
+    tree = ET.parse("/Users/nassim/Desktop/Stage/"+filename)
+    root = tree.getroot()
+    string = ':'
+        
+    return render_template('afficher.html', data=data,tree=tree, root=root, string=string) #doc=doc, medical_event=medical_event
 
 
 

@@ -5,7 +5,24 @@
 {% block content%}
 
         <div class="main_container">
-                <h1>le nom du fichier est:  {{doc.firstChild.tagName}} </h1>
+
+
+
+
+                <div class="item">
+                    {%for child in root%}
+                        <ul>
+                            <li class="tag">{{child.tag}}</li><br>
+                            <li class="text">{{child.text}}</li><br>
+                         </ul>
+
+
+                    {%endfor%}
+
+                </div>
+
+
+
 
         </div>
 
