@@ -178,5 +178,62 @@ body{
     color: #2e4ead;
 }
 .text{
+    color:black ;
+    line-height: 30px;
+    color: black;
+}
+
+.trouver{
+    color: #4360b5;
+}
+
+.wrapper .main_container .itemaff{
+    background: #fff;
+    margin-bottom: 10px;
+    padding: 15px;
+    font-size: 14px;
+    line-height: 20px;
+    overflow:auto;
+    height: 550px;
+    width: 50%;
+    float: left;
+    border-width:1px;
+    border-style:dashed;
+    border-color:#4360b5;
+
+}
+
+.wrapper .main_container .itemaff1{
+    background: #fff;
+    margin-bottom: 10px;
+    padding: 15px;
+    font-size: 14px;
+    line-height: 20px;
+    overflow:auto;
+    height: 550px;
+    width: 50%;
+    float: right;
+    border-width:1px;
+    border-style:dashed;
+    border-color:#4360b5;
+
+
+}
+.form{
+    padding-top: 50px;
+}
+.bouton{
+    color: white;
+    display: inline-block;
+    padding: 5px 10px;
+    background: #2e4ead;
+    border: 1px solid #2e4ead;
+
+}
+
+.affchage{
+    line-height: 30px;
+}
+.af{
     line-height: 30px;
 }

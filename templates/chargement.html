@@ -6,17 +6,31 @@
 
         <div class="main_container">
             <div class="item">
-            <h1>Upload new File</h1>
+            <h3>Veuillez sélectionner un fichier à traiter </h3>
+
+                <p>
+	            {% with messages = get_flashed_messages() %}
+	                  {% if messages %}
+		            <ul class=flashes>
+		                {% for message in messages %}
+		                 <li>{{ message }}</li>
+		                {% endfor %}
+		            </ul>
+	                {% endif %}
+	            {% endwith %}
+                </p>
+
+            <form class="form" method=post enctype=multipart/form-data>
+                <input class="bouton" type=file name=file>
+                <input   type=submit value=Upload>
+                <br><br>
 
 
-            <form method=post enctype=multipart/form-data>
-                <input type=file name=file>
-                <input type=submit value=Upload>
-            </form>
 
-            <form method="get" enctype=multipart/form-data>
 
-            </form>
+
+
+                </form>
             </div>
          </div>
 

@@ -1,10 +1,66 @@
 {% extends "index.html" %}
-
-{% block title%}  {% endblock%}
+{% block title%}  {% endblock %}
 
 
 {% block content%}
 
+<div class="main_container">
 
 
-{% endblock%}
+
+
+                 <div class="itemaff">
+
+              <!--  {%for t in espace%}
+                      {% for medical_event in root.iter('medical_event')%}
+
+
+                          {%if t=='fatigue'%}
+                            <span class="affchage"><font color="red">{{t}}</font></span>
+                          {%else%}
+                            <span class="af">{{t}}</span>
+                          {%endif%}
+                     {%endfor%}
+                {%endfor%}
+
+         -->
+             {%for t in space%}
+
+                            {%if t == 'fatigue'%}
+
+                                     <span class="affchage"><font color="red">{{t}}</font></span>
+                            {%else%}
+
+                                     <span class="af">{{t}}</span>
+
+
+
+                            {%endif%}
+
+            {%endfor%}
+
+
+
+
+
+                 </div>
+                <div class="itemaff1">
+                {% for medical_event in root.iter('medical_event')%}
+                    <ul>
+                        <li class="trouver">Evenement médical : {{medical_event.attrib.text}} </li><br>
+                        <li> Tag : {{medical_event.attrib.tag }} </li><br>
+
+
+                    </ul>
+
+                    {%endfor%}
+                </div>
+
+
+
+        </div>
+
+
+
+
+{%endblock content%}

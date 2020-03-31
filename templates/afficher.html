@@ -1,29 +1,43 @@
 {% extends "index.html" %}
+
 {% block title%}  {% endblock%}
 
 
 {% block content%}
 
-        <div class="main_container">
+
+<div class="main_container">
+
+
+
+                        <div class="itemaff">
+
+                             <form class="form" method=get enctype=multipart/form-data>
+                              <input type="file" name="prenom" />
+                             <input   type=submit value=Upload>
+                <br><br>
+                </form>
+
+
+
+                         </div>
 
 
 
 
-                <div class="item">
-                    {%for child in root%}
-                        <ul>
-                            <li class="tag">{{child.tag}}</li><br>
-                            <li class="text">{{child.text}}</li><br>
-                         </ul>
+                <div class="itemaff1">
 
 
-                    {%endfor%}
+
+
+
+
 
                 </div>
 
 
 
 
-        </div>
 
-{% endblock content%}
+</div>
+{% endblock%}

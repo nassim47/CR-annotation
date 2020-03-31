@@ -1,28 +1,36 @@
 import os
-
-from flask import Flask, render_template, request, redirect, flash, url_for
-from werkzeug.utils import secure_filename
-
+from termcolor import colored
 import xml.dom.minidom
+import json
+from flask import json
+import xmltodict
+
 import xml.etree.ElementTree as ET
+from xml.dom.minidom import parse
 
-from lxml import etree
 
+
+
+from flask import Flask, render_template, request, redirect, flash, url_for, send_file, safe_join
+from werkzeug.utils import secure_filename
+from flask import send_from_directory
 
 UPLOAD_FOLDER = '/Users/nassim/Desktop/Stage'
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'log', 'xml'])
-
-
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'log', 'xml', 'json'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.secret_key = "secret key"
+
+
 
 @app.route('/')
 def index():
-    data ={
-        'title':'AppTool',
-       }
+    data = {
+        'title': 'AppTool',
+    }
     return render_template('index.html', data=data)
+
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -45,44 +53,58 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('afficher',
+            file.save(filename)
+            return redirect(url_for('annotation',
                                     filename=filename))
     return render_template('chargement.html')
 
 
 '''@app.route('/afficher/<filename>')
 def uploaded_file(filename):
-
     n = send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
     return n
 '''
 
-@app.route('/afficher/<filename>')
-def afficher(filename):
-    data ={
-        'title':'Afficher',
-       }
 
-    #doc = xml.dom.minidom.parse("/Users/nassim/Desktop/Stage/"+filename)
-    #medical_event = doc.getElementsByTagName("medical_event")
-    #tree = etree.parse("/Users/nassim/Desktop/Stage/"+filename)
-
-
-    tree = ET.parse("/Users/nassim/Desktop/Stage/"+filename)
-    root = tree.getroot()
-    string = ':'
-        
-    return render_template('afficher.html', data=data,tree=tree, root=root, string=string) #doc=doc, medical_event=medical_event
+@app.route('/afficher/', methods=['GET', 'POST'])
+def afficher():
+    data = {
+        'title': 'Afficher',
+    }
+    #tree = ET.parse("/Users/nassim/Desktop/Stage/" + filename)
+    #root = tree.getroot()
 
 
 
-@app.route('/annotation/')
-def annotation():
+
+
+    return render_template('afficher.html', data=data)
+
+
+@app.route('/annotation/<filename>')
+def annotation(filename):
     data = {
         'title': 'Annotation',
     }
-    return render_template('annotation.html', data=data)
+    tree = ET.parse("/Users/nassim/Desktop/Stage/"+filename)
+    root = tree.getroot()
+
+
+    #with open('/Users/nassim/Desktop/Stage/' + filename, 'rt') as myfile:
+     # contents = myfile.read()
+      #espace = contents.split()
+      #saut = contents.split('\n')
+
+    with open("/Users/nassim/Desktop/Stage/"+filename, 'rt') as fd:
+        doc = xmltodict.parse(fd.read())
+        space = doc['CR']['contenu'].split()
+
+
+
+    return render_template('annotation.html', data=data,space=space, root=root, tree=tree, doc=doc)
+
+
 
 @app.route('/affectation/')
 def affectation():
@@ -90,6 +112,7 @@ def affectation():
         'title': 'Affectation',
     }
     return render_template('affectation.html', data=data)
+
 
 @app.route('/guide/')
 def guide():
@@ -99,6 +122,5 @@ def guide():
     return render_template('guide.html', data=data)
 
 
-
 if __name__ == '__main__':
-    app.run(debug=True, port= 3000)
+    app.run(debug=True, port=3000)
