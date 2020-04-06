@@ -3,6 +3,11 @@ from termcolor import colored
 import xml.dom.minidom
 import json
 from flask import json
+from os.path import basename
+from lxml import etree
+import re
+
+
 import xmltodict
 
 import xml.etree.ElementTree as ET
@@ -59,27 +64,30 @@ def upload_file():
     return render_template('chargement.html')
 
 
-'''@app.route('/afficher/<filename>')
-def uploaded_file(filename):
-    n = send_from_directory(app.config['UPLOAD_FOLDER'],
-                               filename)
-    return n
-'''
 
 
-@app.route('/afficher/', methods=['GET', 'POST'])
+
+@app.route('/afficher/')
 def afficher():
     data = {
-        'title': 'Afficher',
+        'title': 'afficher',
     }
-    #tree = ET.parse("/Users/nassim/Desktop/Stage/" + filename)
-    #root = tree.getroot()
+
+
+
+    #with open('/Users/nassim/Desktop/Stage/' + filename, 'rt') as myfile:
+     # contents = myfile.read()
+      #espace = contents.split()
+      #saut = contents.split('\n')
 
 
 
 
 
     return render_template('afficher.html', data=data)
+
+
+
 
 
 @app.route('/annotation/<filename>')
@@ -90,11 +98,22 @@ def annotation(filename):
     tree = ET.parse("/Users/nassim/Desktop/Stage/"+filename)
     root = tree.getroot()
 
+    liste = []
+    start_end = []
 
-    #with open('/Users/nassim/Desktop/Stage/' + filename, 'rt') as myfile:
-     # contents = myfile.read()
-      #espace = contents.split()
-      #saut = contents.split('\n')
+
+
+    for medical_event in root.findall('sentences/sentence/medical_event'):
+        liste.append(medical_event.get('text'))
+
+
+
+
+    with open('/Users/nassim/Desktop/Stage/' + filename, 'rt') as myfile:
+      contents = myfile.read()
+      espace = contents.split()
+      saut = contents.split('\n')
+
 
     with open("/Users/nassim/Desktop/Stage/"+filename, 'rt') as fd:
         doc = xmltodict.parse(fd.read())
@@ -102,7 +121,22 @@ def annotation(filename):
 
 
 
-    return render_template('annotation.html', data=data,space=space, root=root, tree=tree, doc=doc)
+
+
+    for sentence in space:
+
+        for l in liste:
+            start = int(sentence.find(l))
+            end = start + len(l)
+            start_end.append(start)
+            start_end.append(end)
+
+
+
+
+
+    return render_template('annotation.html', data=data,espace=espace, root=root, tree=tree, saut=saut, space=space,
+                           doc=doc, liste=liste, start_end=start_end, start=start, end=end)
 
 
 

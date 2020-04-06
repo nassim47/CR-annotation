@@ -11,16 +11,11 @@
 
 
                         <div class="itemaff">
+       {% for child in root%}
+               {{child.tag}}
+                {{child.text}}
+        {%endfor%}
 
-                             <form class="form" method=get enctype=multipart/form-data>
-                              <input type="file" name="prenom" />
-                             <input   type=submit value=Upload>
-                <br><br>
-                </form>
-
-
-
-                         </div>
 
 
 
@@ -40,4 +35,4 @@
 
 
 </div>
-{% endblock%}
+{% endblock content%}

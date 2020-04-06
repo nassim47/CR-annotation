@@ -11,8 +11,8 @@
 
                  <div class="itemaff">
 
-              <!--  {%for t in espace%}
-                      {% for medical_event in root.iter('medical_event')%}
+                    <!--{%for t in espace%}
+
 
 
                           {%if t=='fatigue'%}
@@ -20,24 +20,31 @@
                           {%else%}
                             <span class="af">{{t}}</span>
                           {%endif%}
+
                      {%endfor%}
-                {%endfor%}
-
-         -->
-             {%for t in space%}
-
-                            {%if t == 'fatigue'%}
-
-                                     <span class="affchage"><font color="red">{{t}}</font></span>
-                            {%else%}
-
-                                     <span class="af">{{t}}</span>
+                    -->
 
 
 
-                            {%endif%}
 
-            {%endfor%}
+
+                   {%for t in space%}
+
+                              {%if t in liste  %}
+                                <span class="affchage"><font color="red">{{t}}</font></span>
+                              {%else%}
+                                <span class="af">{{t}}</span>
+                              {%endif%}
+
+                   {%endfor%}
+
+
+              <!-- {%for medical_event in root.findall('sentences/sentence/medical_event')%}
+                     {{medical_event.get('text')}}
+             {%endfor%}
+                -->
+
+
 
 
 
@@ -47,7 +54,7 @@
                 <div class="itemaff1">
                 {% for medical_event in root.iter('medical_event')%}
                     <ul>
-                        <li class="trouver">Evenement médical : {{medical_event.attrib.text}} </li><br>
+                        <li class="trouver">Evénemment médical : {{medical_event.attrib.text}} </li><br>
                         <li> Tag : {{medical_event.attrib.tag }} </li><br>
 
 
