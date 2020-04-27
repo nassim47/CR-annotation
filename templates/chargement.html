@@ -1,38 +1,39 @@
-{% extends "index.html" %}
+
+{% extends "index.html" %} <!--Héritage Pour importer la structure HTML de index.html-->
 
 {% block title%}  {% endblock%}
 
 {% block content%}
 
-        <div class="main_container">
+    <div class="main_container">
             <div class="item">
-            <h3>Veuillez sélectionner un fichier à traiter </h3>
 
-                <p>
-	            {% with messages = get_flashed_messages() %}
-	                  {% if messages %}
-		            <ul class=flashes>
-		                {% for message in messages %}
-		                 <li>{{ message }}</li>
-		                {% endfor %}
-		            </ul>
-	                {% endif %}
-	            {% endwith %}
-                </p>
+                <h4>Veuillez sélectionner un fichier à traiter </h4>
 
-            <form class="form" method=post enctype=multipart/form-data>
-                <input class="bouton" type=file name=file>
-                <input   type=submit value=Upload>
-                <br><br>
+                    <p>
+                        <!-- Affichage des messages flash -->
+                        {% with messages = get_flashed_messages() %}
+                              {% if messages %}
+                            <ul class=flashes>
+                                {% for message in messages %}
+                                 <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        {% endwith %}
+                    </p>
 
+                <!-- Formulaire de téléchargement -->
+                <form class="form" method=post enctype=multipart/form-data>
 
-
-
-
+                    <input class="bouton" type=file name=file>
+                    <input class="boutonUpload"  type=submit value=Upload>
+                    <br><br>
 
                 </form>
+
             </div>
-         </div>
+    </div>
 
 
 {% endblock content%}

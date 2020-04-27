@@ -1,73 +1,153 @@
-{% extends "index.html" %}
+{% extends "index.html" %} <!--Héritage Pour importer la structure HTML de index.html-->
 {% block title%}  {% endblock %}
 
 
 {% block content%}
 
-<div class="main_container">
+    <div class="main_container">
 
+         <div class="item_Text_XML">
+                <!-- Affichage du text et mise en couleur des mots clés-->
+                {%for mot in space%}
 
-
-
-                 <div class="itemaff">
-
-                    <!--{%for t in espace%}
-
-
-
-                          {%if t=='fatigue'%}
-                            <span class="affchage"><font color="red">{{t}}</font></span>
-                          {%else%}
-                            <span class="af">{{t}}</span>
-                          {%endif%}
-
-                     {%endfor%}
-                    -->
-
-
-
-
-
-                   {%for t in space%}
-
-                              {%if t in liste  %}
-                                <span class="affchage"><font color="red">{{t}}</font></span>
+                              {%if mot in liste  %}
+                                <span class="affchage"><font color="red">{{mot}}</font></span>
                               {%else%}
-                                <span class="af">{{t}}</span>
+                                <span class="af">{{mot}}</span>
                               {%endif%}
+                {%endfor%}
+         </div>
 
-                   {%endfor%}
+
+         <div class="item_attributs">
+             <!-- Affichage des attributs 'text, tag, start, end'-->
+             <h7>Liste des évenements médicaux :</h7>
+             <br>
+
+             {% for medical_event in root.iter('medical_event')%}
+             <ul>
+                 <!--Afficher les attributs 'text'-->
+                 <li class="trouver">Medical_event :  {{medical_event.attrib.text}} </li>
+                 <br>
+                 <div class="dropdown">
+
+                     <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                             Attributs
+                     </button>
+
+                     <div class="dropdown-menu">
 
 
-              <!-- {%for medical_event in root.findall('sentences/sentence/medical_event')%}
-                     {{medical_event.get('text')}}
+                            <!--Afficher les attributs 'tag'-->
+                          <a class="dropdown-item" href="#">Tag : {{medical_event.attrib.tag }}</a>
+                            <!--Afficher les attributs 'start'-->
+                          <a class="dropdown-item" href="#">Start : {{medical_event.attrib.start }}</a>
+                         <!--Afficher les attributs 'end'-->
+                          <a class="dropdown-item" href="#">End : {{medical_event.attrib.end }}</a>
+
+                     </div>
+                 </div>
+
+              </ul>
              {%endfor%}
-                -->
+         </div>
 
 
+         <div class="item_expression_coder">
 
+            <h5>Expression à coder</h5>
+            <br>
+            <p>Veuillez sélectionner l'expression à coder dans la liste déroulante suivante puis validez :</p>
 
+            <form class="form-inline" method="POST">
+                 <div class="form-group">
+                     <div class="input-group">
 
+                        <select name="comp_select" class="selectpicker form-control">
+                            <!--Afficher les attributs 'text' dans la liste déroulante-->
+                          {%for medical_event in root.findall('sentences/sentence/medical_event')%}
+                          <option value="{{medical_event.get('text')}}">{{ medical_event.get('text')}}</option>
+                          {%endfor%}
+                        </select>
 
+                     </div>
+
+                      <button type="submit" class="btn btn-outline-primary">valider</button>
 
                  </div>
-                <div class="itemaff1">
-                {% for medical_event in root.iter('medical_event')%}
-                    <ul>
-                        <li class="trouver">Evénemment médical : {{medical_event.attrib.text}} </li><br>
-                        <li> Tag : {{medical_event.attrib.tag }} </li><br>
+            </form>
 
+            <br>
 
-                    </ul>
+            <h5>Choix des paramètres </h5>
+            <br>
 
-                    {%endfor%}
-                </div>
+            <strong>Type de l'expression</strong>
+            <br>
+            <br>
 
+            <form class="form-inline" method="POST">
+                 <div class="form-group">
+                     <div class="input-group">
+                      <br>
 
+                           <select name="comp_select" class="custom-select">
 
-        </div>
+                                  <option value="">Evénement médical</option>
+                                  <option value="">Négation</option>
+                                  <option value="">Evénement social</option>
+                                  <option value="">Expression temporel</option>
+                                  <option value="">Nom de section</option>
 
+                           </select>
 
+                      </div>
+                 </div>
+            </form>
+            <br>
+
+            <strong>Section médical</strong>
+            <br>
+            <br>
+
+             <form class="form-inline" method="POST">
+                  <div class="form-group">
+                       <div class="input-group">
+                       <br>
+
+                             <select name="comp_select" class="custom-select">
+
+                                    <option value="">Symptomes et examens physique du patient</option>
+                                    <option value="">examens paracliniques</option>
+
+                             </select>
+
+                       </div>
+                  </div>
+             </form>
+             <br>
+
+             <strong>Section social</strong>
+             <br>
+             <br>
+
+             <form class="form-inline" method="POST">
+                   <div class="form-group">
+                        <div class="input-group">
+                        <br>
+
+                             <select name="comp_select" class="custom-select">
+
+                                    <option value="">Mode de vie</option>
+                                    <option value="">Gestion préventive ou thérapeutique</option>
+
+                             </select>
+
+                        </div>
+                   </div>
+             </form>
+         </div>
+    </div>
 
 
 {%endblock content%}

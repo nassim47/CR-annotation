@@ -187,15 +187,15 @@ body{
     color: #4360b5;
 }
 
-.wrapper .main_container .itemaff{
+.wrapper .main_container .item_Text_XML{
     background: #fff;
     margin-bottom: 10px;
     padding: 15px;
     font-size: 14px;
     line-height: 20px;
     overflow:auto;
-    height: 550px;
-    width: 50%;
+    height: 706px;
+    width: 40%;
     float: left;
     border-width:1px;
     border-style:dashed;
@@ -203,15 +203,15 @@ body{
 
 }
 
-.wrapper .main_container .itemaff1{
+.wrapper .main_container .item_attributs{
     background: #fff;
     margin-bottom: 10px;
     padding: 15px;
     font-size: 14px;
     line-height: 20px;
     overflow:auto;
-    height: 550px;
-    width: 50%;
+    height: 706px;
+    width: 20%;
     float: right;
     border-width:1px;
     border-style:dashed;
@@ -219,13 +219,41 @@ body{
 
 
 }
+
+.wrapper .main_container .item_expression_coder{
+    background: #fff;
+    margin-bottom: 10px;
+    padding: 15px;
+    font-size: 14px;
+    line-height: 20px;
+    overflow:auto;
+    height: 706px;
+    width: 40%;
+    float: right;
+    border-width:1px;
+    border-style:dashed;
+    border-color:#4360b5;
+
+
+}
+
+
 .form{
     padding-top: 50px;
 }
 .bouton{
     color: white;
     display: inline-block;
-    padding: 5px 10px;
+    padding: 3px 5px;
+    background: #2e4ead;
+    border: 1px solid #2e4ead;
+
+}
+
+.boutonUpload{
+    color: white;
+    display: inline-block;
+    padding: 5px 5px;
     background: #2e4ead;
     border: 1px solid #2e4ead;
 
@@ -237,3 +265,42 @@ body{
 .af{
     line-height: 40px;
 }
+
+
+.dropdown-item{
+    width: 20px;
+   font-size: 10px;
+}
+
+.wrapper .main_container .itemaff{
+    background: #fff;
+    margin-bottom: 10px;
+    padding: 15px;
+    font-size: 14px;
+    line-height: 20px;
+    overflow:auto;
+    height: 706px;
+    width: 50%;
+    float: left;
+    border-width:1px;
+    border-style:dashed;
+    border-color:#4360b5;
+
+}
+.wrapper .main_container .itemaff1{
+    background: #fff;
+    margin-bottom: 10px;
+    padding: 15px;
+    font-size: 14px;
+    line-height: 20px;
+    overflow:auto;
+    height: 706px;
+    width: 50%;
+    float: left;
+    border-width:1px;
+    border-style:dashed;
+    border-color:#4360b5;
+
+}
+
+

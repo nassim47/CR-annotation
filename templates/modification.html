@@ -1,0 +1,129 @@
+{% extends "index.html" %}
+
+{% block title%}  {% endblock%}
+
+
+{% block content%}
+
+
+<div class="main_container">
+
+     <div class="itemaff">
+
+      <!-- Affichage du text et mise en couleur des mots clés-->
+         {%for mot in space%}
+
+              {%if mot in liste  %}
+                <span class="affchage"><font color="red">{{mot}}</font></span>
+              {%else%}
+                <span class="af">{{mot}}</span>
+              {%endif%}
+
+         {%endfor%}
+
+
+     </div>
+
+
+
+                        <div class="itemaff1">
+                            <h3>Expression à coder</h3>
+                            <br>
+                            <p>Veuillez sélectionner l'expression à coder dans la liste déroulante suivante puis validez :</p>
+
+
+
+                       <form class="form-inline" method="POST">
+                                      <div class="form-group">
+                                        <div class="input-group">
+
+                                                <select name="comp_select" class="selectpicker form-control">
+                                                  {%for medical_event in root.findall('sentences/sentence/medical_event')%}
+                                                  <option value="{{medical_event.get('text')}}">{{ medical_event.get('text')}}</option>
+                                                  {%endfor%}
+                                                </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-outline-primary">valider</button>
+                                      </div>
+                       </form>
+
+
+                            <br>
+
+                            <h4>Choix des paramètres </h4>
+                            <br>
+
+
+
+                            <strong>Type de l'expression</strong>
+                            <br>
+                            <br>
+
+                 <form class="form-inline" method="POST">
+                      <div class="form-group">
+                             <div class="input-group">
+
+
+                                 <br>
+
+                                   <select name="comp_select" class="custom-select">
+
+                                             <option value="">Evénement médical</option>
+                                             <option value="">Négation</option>
+                                             <option value="">Evénement social</option>
+                                             <option value="">Expression temporel</option>
+                                             <option value="">Nom de section</option>
+
+                                   </select>
+
+                             </div>
+                      </div>
+                 </form>
+                    <br>
+
+                    <strong>Section médical</strong>
+                            <br>
+                            <br>
+                             <form class="form-inline" method="POST">
+                      <div class="form-group">
+                             <div class="input-group">
+                                 <br>
+
+                                 <select name="comp_select" class="custom-select">
+
+                                             <option value="">Symptomes et examens physique du patient</option>
+                                             <option value="">examens paracliniques</option>
+
+                                   </select>
+
+                             </div>
+                      </div>
+                 </form>
+                    <br>
+
+                    <strong>Section social</strong>
+                            <br>
+                            <br>
+                 <form class="form-inline" method="POST">
+                      <div class="form-group">
+                             <div class="input-group">
+                                 <br>
+
+                                 <select name="comp_select" class="custom-select">
+
+                                             <option value="">Mode de vie</option>
+                                             <option value="">Gestion préventive ou thérapeutique</option>
+
+                                   </select>
+
+                             </div>
+                      </div>
+                 </form>
+
+
+
+
+
+
+</div>
+{%endblock content%}
